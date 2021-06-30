@@ -1,7 +1,7 @@
 import {StarBorder} from "@material-ui/icons";
 import {Link} from 'react-router-dom';
-import {Skeleton} from '@material-ui/lab';
 import React from "react";
+import DynamicSkeleton from "../../components/dynamic-skeleton";
 
 interface ISearchPageRepo {
     id: number
@@ -14,7 +14,7 @@ interface ISearchPageRepo {
 export const RepositoryCard = ({repo}: {repo: ISearchPageRepo}) => {
     if (!repo) {
         return (
-            <Skeleton width='100%' height={146} variant='rect'  />
+            <DynamicSkeleton classes="u-w-full !u-h-[146px]" variant='rect'  />
         )
     }
 

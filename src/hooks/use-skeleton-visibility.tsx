@@ -6,13 +6,13 @@ export const SkeletonVisibilityProvider = ({isLoading, children}) => {
     const [skeletonVisibility, setSkeletonVisibility] = useState(false);
 
     useEffect(() => {
-        if (isLoading) {
-            setSkeletonVisibility(false);
-        }
+        setSkeletonVisibility(false);
 
-        setTimeout(() => {
-            setSkeletonVisibility(true);
-        }, 400)
+        if (isLoading) {
+            setTimeout(() => {
+                setSkeletonVisibility(true);
+            }, 450);
+        }
     }, [isLoading]);
 
     return (

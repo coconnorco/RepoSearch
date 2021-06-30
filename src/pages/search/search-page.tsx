@@ -3,7 +3,7 @@ import {RepositoryCard} from "./repository-card";
 import {FilterPanel} from "./filter-panel";
 import {useSearchRepositories} from "../../api/hooks/use-search-repositories";
 import {useHistory, useLocation} from "react-router-dom";
-import {SkeletonVisibilityProvider, useSkeletonVisibility} from "../../hooks/use-skeleton-visibility";
+import {SkeletonVisibilityProvider} from "../../hooks/use-skeleton-visibility";
 import {ISearchQuery, PageSize, Sort as SortType} from "../../api/github-api/search-repositories";
 import {Pagination} from "@material-ui/lab";
 import DynamicSkeleton from "../../components/dynamic-skeleton";
@@ -44,13 +44,11 @@ const RepositoryCount = ({count = 0, dataStatus}: {count: number, dataStatus: Qu
 const ResultsContainer = ({children}) => <div className='u-grid u-grid-cols-1 md:u-grid-cols-2 u-gap-4'>{children}</div>
 
 const Results = ({data, dataStatus, page, pageUpdate}: {data: any, dataStatus: QueryStatus, page: number, pageUpdate: (p: string|number) => void}) => {
-    const skeletonVisibility = useSkeletonVisibility();
-
     switch(dataStatus) {
         case 'error':
             return <p>Whoops. Looks like something went wrong. Please refresh the page and try again</p>;
         case 'loading':
-            return skeletonVisibility && (
+            return (
                 <ResultsContainer>
                     {Array(PageSize).fill(null).map((r, i) => (
                         <RepositoryCard key={i} repo={r} />
